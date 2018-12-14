@@ -2,10 +2,6 @@ $(document).ready(function() {
   /*global io*/
   var socket = io();
   
-  // socket.on('user count', function(data) {
-  //   console.log(data);
-  // });
-  
   socket.on('user', function(data) {
     $('#num-users').text(data.currentUsers + ' users online');
     var message = data.name;
@@ -24,8 +20,7 @@ $(document).ready(function() {
   // Form submission with new message in field with id 'm'
   $('form').submit(function() {
     var messageToSend = $('#m').val();
-    //send message to server here
-    socket.emit('chat message', messageToSend);
+    socket.emit('chat message', messageToSend); //send message to server here
     $('#m').val('');
     return false; // prevent form submit from refreshing page
   });
