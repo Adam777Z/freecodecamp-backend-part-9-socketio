@@ -27,9 +27,8 @@ module.exports = function(app, db) {
       callbackURL: 'https://prickle-woodpecker.glitch.me/auth/github/callback'
     },
     function(accessToken, refreshToken, profile, cb) {
-      db.db().collection('chatusers').findAndModify(
+      db.db().collection('chatusers').findOneAndUpdate(
         { id: profile.id },
-        {},
         { $setOnInsert: {
           id: profile.id,
           name: profile.displayName || 'Anonymous',
@@ -43,7 +42,7 @@ module.exports = function(app, db) {
         }, $inc: {
           login_count: 1
         }},
-        { upsert: true, new: true }, //Insert object if not found, Return new object after modify
+        { upsert: true, returnOriginal: false }, //Insert object if not found, Return new object after modify
         (err, doc) => {
           return cb(null, doc.value);
         }
