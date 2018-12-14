@@ -53,10 +53,8 @@ mongo.connect(process.env.DATABASE, { useNewUrlParser: true }, (err, db) => {
   var currentUsers = 0;
   
   io.on('connection', socket => {
-    // console.log('A user has connected');
     console.log('user ' + socket.request.user.name + ' connected');
     ++currentUsers;
-    // io.emit('user count', currentUsers);
     io.emit('user', { name: socket.request.user.name, currentUsers, connected: true });
     
     socket.on('chat message', message => {
@@ -64,11 +62,8 @@ mongo.connect(process.env.DATABASE, { useNewUrlParser: true }, (err, db) => {
     });
     
     socket.on('disconnect', () => {
-      /*anything you want to do on disconnect*/
-      // console.log('A user has disconnected');
       console.log('user ' + socket.request.user.name + ' disconnected');
       --currentUsers;
-      // io.emit('user count', currentUsers);
       io.emit('user', { name: socket.request.user.name, currentUsers, connected: false });
     });
   });
