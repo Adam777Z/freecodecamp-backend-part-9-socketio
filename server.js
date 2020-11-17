@@ -32,7 +32,7 @@ app.use(session({
 }));
 
 
-mongo.connect(process.env.DATABASE, { useNewUrlParser: true }, (err, db) => {
+mongo.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true }, (err, db) => {
   if (err) { console.log('Database error: ' + err); }
 
   auth(app, db);
