@@ -4,7 +4,7 @@ const passport       = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
 
 module.exports = function(app, db) {
-  
+
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -42,12 +42,12 @@ module.exports = function(app, db) {
         }, $inc: {
           login_count: 1
         }},
-        { upsert: true, returnOriginal: false }, //Insert object if not found, Return new object after modify
+        { upsert: true, returnDocument: 'after' }, // Insert object if not found, Return the updated document
         (err, doc) => {
           return cb(null, doc.value);
         }
       );
     }
   ));
-  
+
 }
