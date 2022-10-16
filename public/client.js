@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 	var socket = io();
 
 	socket.on('user', (data) => {
-		document.querySelector('#num-users').textContent = data['currentUsers'] + ' users online';
+		document.querySelector('#num-users').textContent = data['currentUsers'] + ' user(s) online';
 
 		let message = data['name'];
 
