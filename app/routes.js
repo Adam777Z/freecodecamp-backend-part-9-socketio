@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 module.exports = function(app, db) {
-  
+
   function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
@@ -31,8 +31,10 @@ module.exports = function(app, db) {
 
   app.route('/logout')
     .get((req, res) => {
-        req.logout();
+      req.logout((err) => {
+        if (err) { return next(err); }
         res.redirect('/');
+      });
     });
 
   app.use((req, res, next) => {
@@ -40,5 +42,5 @@ module.exports = function(app, db) {
       .type('text')
       .send('Not Found');
   });
-  
+
 }
