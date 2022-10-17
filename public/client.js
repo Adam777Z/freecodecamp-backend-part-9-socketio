@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 			message += ' has left the chat.';
 		}
 
-		document.querySelector('#messages').innerHTML += '<li><b>' + message + '</b></li>';
+		document.querySelector('#messages').innerHTML += `<li><b>${message}</b></li>`;
 	});
 
 	socket.on('chat message', (data) => {
-		document.querySelector('#messages').innerHTML += '<li>' + data['name'] + ': ' + data['message'] + '</li>';
+		document.querySelector('#messages').innerHTML += `<li>${data['name']}: ${data['message']}</li>`;
 	});
 
 	// Form submission with new message in field with id 'm'
