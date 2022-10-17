@@ -22,18 +22,15 @@
 
 .chat-box {
 	margin-top: 20px;
-	height: 500px;
 }
 
 #logout {
-	position: absolute;
-	bottom: 20px;
+	margin-top: 20px;
 }
 
 form {
 	background: #000;
 	padding: 3px;
-	width: 500px;
 }
 
 form input {
