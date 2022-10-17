@@ -43,7 +43,7 @@ const allowedOriginsMatcher = /^https?:\/\/([\w-]+\.)*freecodecamp\.org/;
 module.exports = function (app) {
 
   app.use(function (req, res, next) {
-      // var allowedOrigins = ['https://pricey-hugger.glitch.me', 'https://freecodecamp.com', 'https://localhost:3000', 'http://localhost:3000']
+      // var allowedOrigins = ['https://pricey-hugger.glitch.me', 'https://www.freecodecamp.org', 'https://localhost:3000', 'http://localhost:3000']
        // var origin = req.headers.origin;
         // if(allowedOrigins.indexOf(origin) > -1){
         //      res.setHeader('Access-Control-Allow-Origin', origin);
