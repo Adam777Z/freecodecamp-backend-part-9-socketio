@@ -42,46 +42,46 @@ const allowedOriginsMatcher = /^https?:\/\/([\w-]+\.)*freecodecamp\.org/;
 
 module.exports = function (app) {
 
-  app.use(function (req, res, next) {
-      // var allowedOrigins = ['https://pricey-hugger.glitch.me', 'https://www.freecodecamp.org', 'https://localhost:3000', 'http://localhost:3000']
-       // var origin = req.headers.origin;
-        // if(allowedOrigins.indexOf(origin) > -1){
-        //      res.setHeader('Access-Control-Allow-Origin', origin);
-        // }
-      //res.setHeader('Access-Control-Allow-Origin', 'https://pricey-hugger.glitch.me');
-      const origin = req.get('origin');
-      if(allowedOriginsMatcher.test(origin)) {
-        res.setHeader('Access-Control-Allow-Origin', origin);
-      }
-      res.setHeader('Access-Control-Allow-Credentials', true);
-      next();
-  });
+	app.use(function (req, res, next) {
+		// var allowedOrigins = ['https://pricey-hugger.glitch.me', 'https://www.freecodecamp.org', 'https://localhost:3000', 'http://localhost:3000']
+		// var origin = req.headers.origin;
+		// if(allowedOrigins.indexOf(origin) > -1){
+		//      res.setHeader('Access-Control-Allow-Origin', origin);
+		// }
+		//res.setHeader('Access-Control-Allow-Origin', 'https://pricey-hugger.glitch.me');
+		const origin = req.get('origin');
+		if (allowedOriginsMatcher.test(origin)) {
+			res.setHeader('Access-Control-Allow-Origin', origin);
+		}
+		res.setHeader('Access-Control-Allow-Credentials', true);
+		next();
+	});
 
-  app.route('/_api/server.js')
-    .get(function(req, res, next) {
-      console.log('requested');
-      fs.readFile(process.cwd() + '/server.js', function(err, data) {
-        if(err) return next(err);
-        res.send(data.toString());
-      });
-    });
+	app.route('/_api/server.js')
+		.get(function (req, res, next) {
+			console.log('requested');
+			fs.readFile(process.cwd() + '/server.js', function (err, data) {
+				if (err) return next(err);
+				res.send(data.toString());
+			});
+		});
 
-  app.route('/_api/package.json')
-    .get(function(req, res, next) {
-      console.log('requested');
-      fs.readFile(process.cwd() + '/package.json', function(err, data) {
-        if(err) return next(err);
-        res.type('txt').send(data.toString());
-      });
-    });
+	app.route('/_api/package.json')
+		.get(function (req, res, next) {
+			console.log('requested');
+			fs.readFile(process.cwd() + '/package.json', function (err, data) {
+				if (err) return next(err);
+				res.type('txt').send(data.toString());
+			});
+		});
 
-  app.get('/_api/app-info', function(req, res) {
-    var hs = Object.keys(res._headers)
-      .filter(h => !h.match(/^access-control-\w+/));
-    var hObj = {};
-    hs.forEach(h => {hObj[h] = res._headers[h]});
-    delete res._headers['strict-transport-security'];
-    res.json({headers: hObj});
-  });
+	app.get('/_api/app-info', function (req, res) {
+		var hs = Object.keys(res._headers)
+			.filter(h => !h.match(/^access-control-\w+/));
+		var hObj = {};
+		hs.forEach(h => { hObj[h] = res._headers[h] });
+		delete res._headers['strict-transport-security'];
+		res.json({ headers: hObj });
+	});
 
 };
